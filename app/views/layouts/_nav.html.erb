@@ -1,0 +1,22 @@
+<nav>
+    <ul>
+        <li> <%= link_to "Home", root_path %> </li>
+		<% if !user_signed_in? %>
+			<li><%= link_to "Signup", new_user_registration_path %> </li>
+			<li><%= link_to "Login", new_user_session_path %> </li>
+		<% else %>
+			<li><%= link_to "Logout", destroy_user_session_path, method: "delete" %></li>
+		<% end %>
+    </ul>
+</nav>
+<!-- START 
+<div id="container" style="height:100%">
+				<div id="navbar">
+				<ul>
+				<li> <a href="TrailMapPage.html"> Trail Map </a> </li>
+				<li> <a href="BaseLodgePage.html"> Base Lodge </a> </li>
+				<li> <a href="LittleGorePage.html"> Little Gore </a> </li>
+				<li> <a href="SaddleLodgePage.html"> Saddle Lodge </a> </li>
+				<li> <a href="TheGondolaPage.html"> The Gondola </a> </li>
+				</ul>
+				</div> --><!-- End of Navbar -->

@@ -1,0 +1,37 @@
+/******************************
+*******************************
+Style for the Navbar and it's links
+Will be White bar + Background Blue text
+When Hovered, it will invert.
+*******************************
+******************************/
+#navbar { 
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+    background-color: silver;
+    height: auto;
+  }
+ul 		{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #58ACFA;
+  }
+li {
+float: left;
+}
+li a {
+display: block;
+color: white;
+text-align: center;
+padding: 16px 50px;
+text-decoration: none;
+}
+li a:hover {
+background-color: white;
+color: #58ACFA;
+}
+/********************************/
