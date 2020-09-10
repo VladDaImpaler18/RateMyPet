@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
+  has_many :pictures
+  has_many :comments, through: :pictures
+  has_many :replies, through: :comment_reply
+
+
   def self.from_omniauth(auth_hash)
     #Find to see if user has previously logged in via github, if not create them.
     binding.pry
