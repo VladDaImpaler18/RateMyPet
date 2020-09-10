@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   has_many :pictures
   has_many :comments, through: :pictures
-  has_many :replies, through: :comment_reply
 
 
   def self.from_omniauth(auth_hash)
