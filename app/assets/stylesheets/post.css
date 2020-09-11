@@ -1,0 +1,13 @@
+/******************************
+*******************************
+Style for the picture posts.
+Each post is a link to show page.
+Style TBD.
+*******************************
+******************************/
+#post {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
