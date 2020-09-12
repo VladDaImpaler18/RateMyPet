@@ -13,6 +13,8 @@ Rails.application.routes.draw do
    end
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post] #Do i need?
   root to: 'application#welcome'
+
+  get '/pictures/:id', to: 'picture#show', as: 'picture'
   
   
 end
