@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
     def dashboard
         #Must be logged in
         #Comes here from Account Settings
-        @picture = Picture.where(user_id: current_user.id)
+        @pictures = Picture.where(user_id: current_user.id)
     end
 
     private
     def require_login
         redirect_to '/' unless current_user
     end
+
 end

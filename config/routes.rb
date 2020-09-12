@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  resources :picture, only:[:new, :create]
+
   #devise_for :views
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'callbacks'}
 
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
   root to: 'application#welcome'
 
   get '/pictures/:id', to: 'picture#show', as: 'picture'
+  get '/gallery', to: 'picture#gallery', as: 'gallery'
+  get '/pictures', to: 'picture#index', as: 'user_pictures'
   
   
 end

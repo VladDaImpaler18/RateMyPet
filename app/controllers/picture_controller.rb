@@ -1,4 +1,9 @@
 class PictureController < ApplicationController
+    before_action :require_login, only: [:new, :create, :index]
+
+    def new
+        binding.pry
+    end
 
     def create
         @picture = Picture.new(picture_params)
@@ -10,10 +15,26 @@ class PictureController < ApplicationController
            redirect_to new_picture_path(@picture)
         end
     end
+    
+    def show
+
+    end
+
+    def index
+        #shows user's pictures
+        binding.pry
+        @pictures = Picture.where(user_id: current_user.id)
+
+    end
+
+    def gallery
+        #shows all pictures
+        @pictures = Picture.all
+    end
 
 
     private
-
+    
     def picture_params
         params.require[:picture].permit(:title, :description, :image)
     end
