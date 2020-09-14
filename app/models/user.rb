@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, :trackable
 
   has_many :pictures
-  has_many :comments#, through: :pictures #Double check to make sure this logic works
+  has_many :categories, through: :pictures
+  has_many :comments #Double check to make sure this logic works
+  
 
 
   def self.from_omniauth(auth_hash)

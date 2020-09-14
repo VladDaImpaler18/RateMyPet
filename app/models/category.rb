@@ -1,3 +1,5 @@
 class Category < ApplicationRecord
-    belongs_to :picture
+    
+    has_many :pictures
+    has_many :users, through: :pictures
 end

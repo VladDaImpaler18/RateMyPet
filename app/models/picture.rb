@@ -1,5 +1,5 @@
 class Picture < ApplicationRecord
-    has_one :category
+    belongs_to :category
     has_many :comments, as: :commentable, dependent: :destroy
     belongs_to :user
     has_one_attached :image, dependent: :destroy
