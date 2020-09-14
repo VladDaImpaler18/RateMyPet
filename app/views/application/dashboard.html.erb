@@ -2,8 +2,9 @@
 <h1> <%= current_user.username %> Dashboard</h1>
 <h4>Newest 5 pictures:</h4>
 <% @pictures.newest_5.each do |picture| %>
-    <%= picture.title %>
-    <%= image_tag picture.image.variant(resize_to_limit: [100, 100]) %>
+    <%= link_to picture_path(picture) do %>
+        <%= render partial: "layouts/picture", locals: {picture: picture, width:300, height:300} %>
+    <% end %>
 <% end %><br>
 <%= link_to "More pictures...", user_pictures_path %><br>
 <%= link_to "Add picture", new_picture_path %>

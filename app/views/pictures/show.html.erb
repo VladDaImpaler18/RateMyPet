@@ -1,2 +1,5 @@
 <h1>Show page</h1>
-<%= @picture.title %>
+<%# THIS SHOULD BE PARTIAL, and depending on page is what
+determins layout (All info the same, just different styles) %>
+<%= render partial: "layouts/picture", locals: {picture: @picture, width:400, height:300} %>
+<%# comment section %>

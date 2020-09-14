@@ -7,9 +7,8 @@ class PicturesController < ApplicationController
 
     def create
         @picture = current_user.pictures.build(picture_params)
-        binding.pry
         if @picture.image.attach(params[:picture][:image]) && @picture.save
-           session[:picture_id] = @picture.id
+           #user_session[:picture_id] = @picture.id is this even needed?
            redirect_to picture_path(@picture)
         else
            flash[:errors] = @picture.errors.full_message
@@ -18,12 +17,11 @@ class PicturesController < ApplicationController
     end
     
     def show
-        binding.pry
+        @picture = Picture.find_by(id: params[:picture_id]) 
     end
 
     def index
         #shows user's pictures
-        binding.pry
         @pictures = Picture.where(user_id: current_user.id)
 
     end

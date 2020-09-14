@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Install imagemagic`sudo apt-get install imagemagick` for Ubuntu
+or Chreck out https://imagemagick.org/script/download.php
+
+special thanks to 
+https://www.codementor.io/ruby-on-rails/tutorial/threaded-comments-polymorphic-associations

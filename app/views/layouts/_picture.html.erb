@@ -1,0 +1,6 @@
+</p><%= picture.title %></p>
+<% if (!!defined?(width) && !!defined?(height) )%>
+    <%= image_tag picture.image.variant(resize_to_limit: [width, height]) %>
+<% else %>
+    <%= image_tag picture.image %>
+<% end %>
