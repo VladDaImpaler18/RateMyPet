@@ -7,6 +7,7 @@ gem 'pry'
 gem 'awesome_print'
 gem 'dotenv-rails'
 gem 'image_processing'
+gem 'mini_magick'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
