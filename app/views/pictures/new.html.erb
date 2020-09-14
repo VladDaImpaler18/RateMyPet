@@ -1,8 +1,8 @@
 <%= form_for @picture do |f| %>
     <%= f.text_field :title, placeholder: "Title" %><br>
-    <%= f.label :description %>
+    <p><%= f.label :description %>:</p>
     <%= f.text_area :description %><br><br>
     
-    <%= form.file_field :image  %>
-    <%= form.submit %>
+    <%= f.file_field :image  %><br>
+    <%= f.submit %>
 <% end %>

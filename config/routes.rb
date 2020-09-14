@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :picture, only:[:new, :create]
+  resources :pictures, only:[:new, :create, :show]
 
   #devise_for :views
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'callbacks'}
@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post] #Do i need?
   root to: 'application#welcome'
 
-  get '/pictures/:id', to: 'picture#show', as: 'picture'
-  get '/gallery', to: 'picture#gallery', as: 'gallery'
-  get '/pictures', to: 'picture#index', as: 'user_pictures'
+  #get '/pictures/:id', to: 'pictures#show', as: 'picture'
+  get '/gallery', to: 'pictures#gallery', as: 'gallery'
+  get '/pictures', to: 'pictures#index', as: 'user_pictures'
   
   
 end

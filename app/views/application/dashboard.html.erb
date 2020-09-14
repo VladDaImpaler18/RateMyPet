@@ -3,7 +3,8 @@
 <h4>Newest 5 pictures:</h4>
 <% @pictures.newest_5.each do |picture| %>
     <%= picture.title %>
+    <%= image_tag picture.image.variant(resize_to_limit: [100,100]) %>
     
-<% end %>
+<% end %><br>
 <%= link_to "More pictures...", user_pictures_path %><br>
 <%= link_to "Add picture", new_picture_path %>

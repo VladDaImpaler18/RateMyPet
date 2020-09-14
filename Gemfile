@@ -6,6 +6,7 @@ ruby '2.6.1'
 gem 'pry'
 gem 'awesome_print'
 gem 'dotenv-rails'
+gem 'image_processing'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

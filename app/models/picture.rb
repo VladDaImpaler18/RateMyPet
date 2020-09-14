@@ -4,7 +4,7 @@ class Picture < ApplicationRecord
     belongs_to :user
     has_one_attached :image, :dependent => :destroy
     
-    validates :title, :image, presence: true
+    validates :title, presence: true
 
     def self.newest_5
         last(5)

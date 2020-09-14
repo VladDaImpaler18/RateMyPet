@@ -1,13 +1,14 @@
-class PictureController < ApplicationController
+class PicturesController < ApplicationController
     before_action :require_login, only: [:new, :create, :index]
 
     def new
-        binding.pry
+        @picture = Picture.new
     end
 
     def create
-        @picture = Picture.new(picture_params)
-        if @picture.save
+        @picture = current_user.pictures.build(picture_params)
+        binding.pry
+        if @picture.image.attach(params[:picture][:image]) && @picture.save
            session[:picture_id] = @picture.id
            redirect_to picture_path(@picture)
         else
@@ -36,6 +37,7 @@ class PictureController < ApplicationController
     private
     
     def picture_params
-        params.require[:picture].permit(:title, :description, :image)
+        params.require(:picture).permit(:title, :description, :image)
     end
+
 end
