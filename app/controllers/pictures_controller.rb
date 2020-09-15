@@ -17,8 +17,7 @@ class PicturesController < ApplicationController
     end
     
     def show
-        binding.pry
-        @picture = Picture.find_by(id: params[:picture_id]) 
+        @picture = Picture.find_by(id: params[:id]) 
     end
 
     def index
