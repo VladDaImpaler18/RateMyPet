@@ -5,6 +5,8 @@
     <%= link_to picture_path(picture) do %>
         <%= render partial: "layouts/picture", locals: {picture: picture, width:300, height:300} %>
     <% end %>
+    <%# I should make a layout that gives this borders and stuff %>
+    <br><br><strong> ----------------------------------------------------</strong>
 <% end %><br>
 <%= link_to "More pictures...", pictures_path %><br>
 <%= link_to "Add picture", new_picture_path %>

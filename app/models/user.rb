@@ -8,7 +8,9 @@ class User < ApplicationRecord
   has_many :categories, through: :pictures
   has_many :comments #Double check to make sure this logic works
   
-
+  def name
+    username
+  end
 
   def self.from_omniauth(auth_hash)
     #Find to see if user has previously logged in via github, if not create them.

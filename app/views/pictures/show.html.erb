@@ -3,3 +3,12 @@
 determins layout (All info the same, just different styles) %>
 <%= render partial: "layouts/picture", locals: {picture: @picture, width:400, height:300} %>
 <%# comment section %>
+<h2>Comments</h2>
+
+<%= form_for [@picture, Comment.new] do |f| %>
+    <%= f.text_area :content, placeholder: "Add a comment" %><br>
+    <%= f.submit "Add Comment" %>
+<% end %>
+<ul>
+    <%= render partial: 'layouts/comment', collection: @picture.comments %>
+</ul>
