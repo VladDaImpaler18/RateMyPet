@@ -9,6 +9,6 @@ determins layout (All info the same, just different styles) %>
     <%= f.text_area :content, placeholder: "Add a comment" %><br>
     <%= f.submit "Add Comment" %>
 <% end %>
-<ul>
+<div class=flex-holder><ul>
     <%= render partial: 'layouts/comment', collection: @picture.comments %>
-</ul>
+</ul></div>

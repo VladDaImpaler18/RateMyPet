@@ -9,4 +9,7 @@ class Picture < ApplicationRecord
     def self.newest_5
         last(5).reverse
     end
+    def get_authorname
+        self.user.name
+    end
 end

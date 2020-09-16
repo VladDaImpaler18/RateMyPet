@@ -5,9 +5,34 @@ Each post is a link to show page.
 Style TBD.
 *******************************
 ******************************/
-#post {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+h3.flex {
+    color: #8ebf42;
+  }
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    border: 1px dashed #666;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: auto;
+  }
+.flex-holder {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border: 1px dashed #666;
+    flex-wrap: wrap;
+}
+.flex-container > div {
 
+    margin: 5px;     
+    border-radius: 3px;
+    background-color: #1faadb;
+    flex-wrap: wrap;
+    width:auto;
+  }
+.img {
+    max-height: 100px
 }

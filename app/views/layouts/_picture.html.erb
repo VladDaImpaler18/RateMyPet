@@ -1,8 +1,20 @@
-<p><%= picture.title %></p>
-<% if (!!defined?(width) && !!defined?(height) )%>
-    <%= image_tag picture.image.variant(resize_to_limit: [width, height]) %>
+<% if defined?(type) && type=="list"%>
+        <div>
+            <%= image_tag picture.image, class: "img" %>
+        </div>
+        <div>
+            <h3 class=flex><%= picture.title %></h3>
+            <small>By <%= picture.get_authorname %></small><br>
+            <small>Submitted <%= time_ago_in_words(picture.created_at) %> ago<br></small>
+        </div>
 <% else %>
-    <%= image_tag picture.image %>
-<% end %><br>
-<small>Submitted <%= time_ago_in_words(picture.created_at) %> ago<br>
-Has <%= pluralize(picture.comments.count, "comment") %> </small>
+    <p><% if (!!defined?(width) && !!defined?(height) )%>
+        <%= image_tag picture.image.variant(resize_to_limit: [width, height]) %>
+    <% else %>
+        <%= image_tag picture.image %>
+    <% end %></p>
+    <h3 class=flex><%= picture.title %></h3><br>
+    <small>Submitted <%= time_ago_in_words(picture.created_at) %> ago<br>
+    Has <%= pluralize(picture.comments.count, "comment") %> </small>
+
+<% end %>
