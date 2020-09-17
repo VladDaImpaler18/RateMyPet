@@ -11,7 +11,7 @@ class PicturesController < ApplicationController
            #user_session[:picture_id] = @picture.id is this even needed?
            redirect_to picture_path(@picture)
         else
-           flash[:errors] = @picture.errors.full_message
+           flash[:errors] = @picture.errors.full_messages
            redirect_to new_picture_path(@picture)
         end
     end
