@@ -25,6 +25,18 @@ h3.flex {
     border: 1px dashed #666;
     flex-wrap: wrap;
 }
+.flex-picture_gallery{
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    border: 1px dashed rgb(0, 255, 13);
+    flex-wrap: wrap;
+}
+.flex-picture_item{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
 .flex-container > div {
 
     margin: 5px;     
@@ -33,6 +45,3 @@ h3.flex {
     flex-wrap: wrap;
     width:auto;
   }
-.img {
-    max-height: 100px
-}

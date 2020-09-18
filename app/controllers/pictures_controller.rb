@@ -1,6 +1,9 @@
 class PicturesController < ApplicationController
-    before_action :require_login#, only: [:new, :create, :index]
+    before_action :require_login, except: [:gallery]
     before_action :set_picture, only: [:show, :edit, :update]
+    before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
+
+    helper_method :owns_picture?
 
     def new
         @picture = Picture.new
@@ -12,20 +15,23 @@ class PicturesController < ApplicationController
            #user_session[:picture_id] = @picture.id is this even needed?
            redirect_to picture_path(@picture)
         else
-           flash[:errors] = @picture.errors.full_messages
-           redirect_to new_picture_path(@picture)
+           render :new
         end
     end
     
     def show
+        @comment = Comment.new
     end
 
     def edit
     end
 
     def update
-        @picture.update(picture_params)
-        redirect_to picture_path(@picture)
+        if @picture.update(picture_params)
+            redirect_to picture_path(@picture)
+        else
+            render :edit
+        end
     end
 
     def index
@@ -35,11 +41,12 @@ class PicturesController < ApplicationController
     end
 
     def gallery
-        #shows all pictures
+        #shows all pictures, does NOT require login
         @pictures = Picture.all
     end
     
     def destroy
+        #must validate current_user's picture ownership
         binding.pry
     end
 
@@ -52,5 +59,15 @@ class PicturesController < ApplicationController
     def set_picture
         @picture = Picture.find_by(id: params[:id])
     end
-
+    
+    def owns_picture?
+        current_user.pictures.include?(Picture.find(params[:id]))
+    end
+    
+    def allowed_to_modify?
+        if !owns_picture?
+            flash[:error] = "You can only edit your own pictures."
+            redirect_back(fallback_location: root_path) 
+        end
+    end
 end

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
     def welcome
         #Into to application
+        @pictures = Picture.newest_5
     end
 
     def dashboard

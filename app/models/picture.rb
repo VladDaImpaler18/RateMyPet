@@ -16,7 +16,6 @@ class Picture < ApplicationRecord
     end
 
     def category_attributes=(attributes)
-        binding.pry
         #{"animal_type" => "Cat"}
         if attributes["animal_type"].present?
             attributes.values.each do |animal_type|

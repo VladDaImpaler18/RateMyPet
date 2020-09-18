@@ -10,9 +10,12 @@ class CommentsController < ApplicationController
         @comment = @commentable.comments.new comment_params
         @comment.user_id=current_user.id
         if @comment.save
-          redirect_back(fallback_location: root_path)#, notice: "Comment Posted"
+          redirect_back(fallback_location: root_path)
         else
-          redirect_back(fallback_location: root_path)#, notice: "Comment Error"
+          flash[:errors] = @comment.errors[:content]
+          @picture = Picture.find_by(id: params[:picture_id])
+          binding.pry
+          render 'pictures/show'
         end
       end
 
