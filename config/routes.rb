@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post] #Do i need?
   root to: 'application#welcome'
 
+  resources :categories, only: [:new, :create]
+
   resources :pictures do
     resources :comments
   end
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   resources :comments do
     resources :comments
   end
+  
   get '/gallery', to: 'pictures#gallery', as: 'gallery'
   #get '/pictures', to: 'pictures#index', as: 'user_pictures'
   

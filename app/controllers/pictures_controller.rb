@@ -6,7 +6,9 @@ class PicturesController < ApplicationController
     end
 
     def create
+        binding.pry
         @picture = current_user.pictures.build(picture_params)
+        binding.pry
         if @picture.image.attach(params[:picture][:image]) && @picture.save
            #user_session[:picture_id] = @picture.id is this even needed?
            redirect_to picture_path(@picture)
@@ -35,7 +37,7 @@ class PicturesController < ApplicationController
     private
     
     def picture_params
-        params.require(:picture).permit(:title, :description, :image)
+        params.require(:picture).permit(:title, :description, :image, :category_id, category_attributes:[:animal_type])
     end
 
 end
