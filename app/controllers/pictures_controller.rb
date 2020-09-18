@@ -1,15 +1,14 @@
 class PicturesController < ApplicationController
-    before_action :require_login, only: [:new, :create, :index]
+    before_action :require_login#, only: [:new, :create, :index]
+    before_action :set_picture, only: [:show, :edit, :update]
 
     def new
         @picture = Picture.new
     end
 
     def create
-        binding.pry
-        @picture = current_user.pictures.build(picture_params)
-        binding.pry
-        if @picture.image.attach(params[:picture][:image]) && @picture.save
+         @picture = current_user.pictures.build(picture_params)
+         if @picture.image.attach(params[:picture][:image]) && @picture.save
            #user_session[:picture_id] = @picture.id is this even needed?
            redirect_to picture_path(@picture)
         else
@@ -19,7 +18,14 @@ class PicturesController < ApplicationController
     end
     
     def show
-        @picture = Picture.find_by(id: params[:id]) 
+    end
+
+    def edit
+    end
+
+    def update
+        @picture.update(picture_params)
+        redirect_to picture_path(@picture)
     end
 
     def index
@@ -32,12 +38,19 @@ class PicturesController < ApplicationController
         #shows all pictures
         @pictures = Picture.all
     end
+    
+    def destroy
+        binding.pry
+    end
 
 
     private
     
     def picture_params
         params.require(:picture).permit(:title, :description, :image, :category_id, category_attributes:[:animal_type])
+    end
+    def set_picture
+        @picture = Picture.find_by(id: params[:id])
     end
 
 end

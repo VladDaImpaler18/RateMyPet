@@ -1,7 +1,7 @@
 <h1>Show page</h1>
-<%# THIS SHOULD BE PARTIAL, and depending on page is what
-determins layout (All info the same, just different styles) %>
+
 <%= render partial: "layouts/picture", locals: {picture: @picture, width:400, height:300} %>
+<%= button_to "Edit Info", edit_picture_path(@picture), method: :get %>
 <%# comment section %>
 <h2>Comments</h2>
 
