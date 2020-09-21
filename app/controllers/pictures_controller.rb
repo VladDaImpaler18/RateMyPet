@@ -12,7 +12,6 @@ class PicturesController < ApplicationController
     def create
          @picture = current_user.pictures.build(picture_params)
          if @picture.image.attach(params[:picture][:image]) && @picture.save
-           #user_session[:picture_id] = @picture.id is this even needed?
            redirect_to picture_path(@picture)
         else
            render :new
@@ -43,8 +42,21 @@ class PicturesController < ApplicationController
     def gallery
         #shows all pictures, does NOT require login
         @pictures = Picture.all
-        binding.pry
+        
     end
+
+    def filter
+        #params[:filter][:category_id] => ["", "1", "3", "4"] First is ALWAYS "" is hidden value -- Can't figure out what reason it's making a hidden field
+        filters = params[:filter][:category_id].collect{ |c_id| next if c_id.empty?; c_id}.compact
+        if  filters.count > 0
+            @pictures = filters.map { |filter| Picture.all.where(:category_id => filter)}.flatten
+            render :gallery
+        else
+            @pictures = Picture.all
+            render :gallery
+        end
+    end
+
     
     def destroy
         #must validate current_user's picture ownership

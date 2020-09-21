@@ -1,8 +1,13 @@
 <h1>Gallery Page</h1>
-<p>Choose a filter:</p>
-<p><%= collection_select(:picture, :category_id, Category.all.order("animal_type ASC"), :id, :animal_type, {:include_blank => "All"}, {:multiple => true}) %>
-<%= button_to "Apply Filter", filter_path %>
-</p>
+
+<p>"Choose a filter:" </p>
+<%= form_tag gallery_path do %>
+    <p><%= collection_select(:filter, :category_id, Category.all.order("animal_type ASC"), :id, :animal_type, {:include_blank => false}, {:multiple => true}) %></p>
+    <%= submit_tag "Select Filter" %>
+<% end %>
+
+
+
 
 <div class=flex-picture_gallery>
     <% @pictures.each do |picture| %>
