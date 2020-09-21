@@ -43,6 +43,7 @@ class PicturesController < ApplicationController
     def gallery
         #shows all pictures, does NOT require login
         @pictures = Picture.all
+        binding.pry
     end
     
     def destroy

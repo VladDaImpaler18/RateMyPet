@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
   
   get '/gallery', to: 'pictures#gallery', as: 'gallery'
+  post '/gallery_filter', to: 'pictures#filter', as: 'filter'
   #get '/pictures', to: 'pictures#index', as: 'user_pictures'
   
 
