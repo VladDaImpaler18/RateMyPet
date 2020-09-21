@@ -3,7 +3,7 @@ class PicturesController < ApplicationController
     before_action :set_picture, only: [:show, :edit, :update]
     before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
 
-    helper_method :owns_picture?
+
 
     def new
         @picture = Picture.new
@@ -73,10 +73,7 @@ class PicturesController < ApplicationController
         @picture = Picture.find_by(id: params[:id])
     end
     
-    def owns_picture?
-        current_user.pictures.include?(Picture.find(params[:id]))
-    end
-    
+ 
     def allowed_to_modify?
         if !owns_picture?
             flash[:error] = "You can only edit your own pictures."

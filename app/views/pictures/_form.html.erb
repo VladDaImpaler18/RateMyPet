@@ -1,33 +1,20 @@
 <%= form_for picture do |f| %>
-    <%= image_tag picture.image, class: "img" if picture.image.attached? %><br>
-    <% if picture.errors[:title].empty?%>
-        <div class="field">
-    <% else %>
-        <div class="field_with_errors">
-    <% end %>
+    <%= image_tag picture.image.variant(resize_to_limit: [800, 500]) if picture.image.attached? %><br>
+    
     <%= f.text_field :title, placeholder: "Title" %><br>
-        </div>
-    <% if picture.errors[:title].empty?%>
-        <div class="field">
-    <% else %>
-        <div class="field_with_errors">
-    <% end %>
+        
+    
     <p><%= f.label :description %>:</p>
     <%= f.text_area :description %><br><br>
-        </div>
+    
     <%= f.label "Category:" %>
     <%= collection_select(:picture, :category_id, Category.all, :id, :animal_type, :include_blank => "Make New") %>
     <%# New Category Fields %>
-    <% if picture.errors[:category].empty?%>
-        <div class="field">
-    <% else %>
-        <div class="field_with_errors">
-    <% end %>
         <p><%= f.fields_for :category, Category.new do |new_animal_type| %>
         <%= new_animal_type.label :animal_type, "New category:" %>
         <%= new_animal_type.text_field :animal_type %>
-        </div>
-<% end %></p><br>
+
+    <% end %></p><br>
     
 
     <p><%= f.file_field :image  if !picture.image.attached?%></p>
@@ -36,3 +23,4 @@
 <% end %>
 <br><br>
 <%= button_to "Delete Page", pictures_path, method: :delete if picture.valid? %>
+<%= link_to 'Back', :back %>

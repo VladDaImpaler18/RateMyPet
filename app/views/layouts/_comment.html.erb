@@ -17,6 +17,7 @@
         </small>
 
         <%= form_for [comment, Comment.new] do |f| %>
+        <%= hidden_field_tag :picture_id, params[:id] %>
             <%= f.text_area :content, placeholder: "Add a Reply" %><br>
             <%= f.submit "Reply to #{comment.get_authorname}" %>
         <% end %>

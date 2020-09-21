@@ -1,20 +1,15 @@
 <h1>Show page</h1>
-
 <%= render partial: "layouts/picture", locals: {picture: @picture, width:nil, height:500} %>
 <%= button_to "Edit Info", edit_picture_path(@picture), method: :get if owns_picture?%>
 <%# comment section %>
+<%= render partial: 'layouts/error_messages', locals: {object: @comment} %>
 <h2>Comments</h2>
-<%= form_for [@picture, @comment] do |f| %>
 
-    <% if @comment.errors[:content].empty?%>
-        <div class="field">
-    <% else %>
-        <div class="field_with_errors">
-    <% end %>
+<%= form_for [@picture, @comment] do |f| %>
     <%= f.text_area :content, placeholder: "Add a comment" %><br>
-        </div>
     <%= f.submit "Add Comment" %>
 <% end %>
 <div class=flex-holder><ul>
     <%= render partial: 'layouts/comment', collection: @picture.comments %>
 </ul></div>
+<%= link_to 'Back', :back %>

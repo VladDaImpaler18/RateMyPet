@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
     before_action :require_login, only: [:dashboard]
 
+    helper_method :owns_picture?
+
     def welcome
         #Into to application
         @pictures = Picture.newest_5
@@ -15,6 +17,11 @@ class ApplicationController < ActionController::Base
     private
     def require_login
         redirect_to '/' unless current_user
+    end
+
+    def owns_picture?
+        picture_id = params[:id] || params[:picture_id]
+        current_user.pictures.include?(Picture.find(picture_id))
     end
 
 end
