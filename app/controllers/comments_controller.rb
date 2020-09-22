@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action :make_commentable, only: [:create]
+    before_action :make_commentable, only: [:create, :destroy]
     before_action :require_login
     before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
 
@@ -12,9 +12,9 @@ class CommentsController < ApplicationController
         @comment = @commentable.comments.new comment_params
         @comment.user_id=current_user.id
         if @comment.save
-          redirect_back(fallback_location: root_path)
+          redirect_to @comment.get_picture
         else
-          @picture = Picture.find_by(id: params[:picture_id])
+          @picture = @comment.get_picture
           render 'pictures/show'
         end
       end
@@ -22,9 +22,12 @@ class CommentsController < ApplicationController
       def destroy
         @comment = Comment.find(params[:id])
         @comment.content="DELETED_COMMENT_HIDE_ME"
-        @comment.save(:validate => false)
-        binding.pry
-        redirect_back(fallback_location: root_path)
+        if @comment.save
+          picture = @comment.get_picture
+          redirect_to picture_path(picture)
+        else
+          redirect_back(fallback_location: root_path)
+        end
       end
     
     private

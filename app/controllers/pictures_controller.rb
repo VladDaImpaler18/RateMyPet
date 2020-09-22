@@ -42,14 +42,13 @@ class PicturesController < ApplicationController
     def gallery
         #shows all pictures, does NOT require login
         @pictures = Picture.all
-        
     end
 
     def filter
         #params[:filter][:category_id] => ["", "1", "3", "4"] First is ALWAYS "" is hidden value -- Can't figure out what reason it's making a hidden field
         filters = params[:filter][:category_id].collect{ |c_id| next if c_id.empty?; c_id}.compact
         if  filters.count > 0
-            @pictures = filters.map { |filter| Picture.all.where(:category_id => filter)}.flatten
+            @pictures = Picture.category_filter(filters)
             render :gallery
         else
             @pictures = Picture.all

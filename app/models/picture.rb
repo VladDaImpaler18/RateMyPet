@@ -3,7 +3,10 @@ class Picture < ApplicationRecord
     belongs_to :user
     has_many :comments, as: :commentable, dependent: :destroy
     has_one_attached :image, dependent: :destroy
-    
+    scope :category_filter, -> (category_id) { where(category_id: category_id) }
+
+
+
     validates :title, presence: true
     validate :must_have_image
 

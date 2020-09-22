@@ -1,6 +1,7 @@
 <nav>
     <ul class=nav>
         <li class=nav> <%= link_to "Home", root_path %> </li>
+		<li class=nav> <%= link_to "Gallery", gallery_path %>
 		<% if !user_signed_in? %>
 			<li class=nav><%= link_to "Signup", new_user_registration_path %> </li>
 			<li class=nav><%= link_to "Login", new_user_session_path %> </li>

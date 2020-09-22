@@ -2,7 +2,8 @@
     <div>
             Has <%= pluralize(comments.count, "comment") %> </small><br>
             <% comments.each do |comment|%>
-                <ul><%= comment.display_content %></ul>
+                <% next if comment.deleted? %>
+                <ul><%= comment.display_content%></ul>
             <% end %>
     </div>
 <% else %>
@@ -22,7 +23,7 @@
         </small>
 
         <%= form_for [comment, Comment.new] do |f| %>
-        <%= hidden_field_tag :picture_id, params[:id] %>
+        <%# hidden_field_tag :picture_id, params[:id] %>
             <% if !comment.deleted? %>
             <%= f.text_area :content, placeholder: "Add a Reply" %><br>
             <%= f.submit "Reply to #{comment.get_authorname}" %>

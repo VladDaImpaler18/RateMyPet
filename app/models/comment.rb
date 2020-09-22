@@ -20,6 +20,22 @@ class Comment < ApplicationRecord
         reply
     end
 
+    def get_picture
+        comment = self
+        until comment.commentable_type=="Picture" do
+            comment = comment.parent_comment
+        end
+        pic = Picture.find_by_id(comment.commentable_id)
+    end
+
+    def parent_comment
+        if commentable_type=="Comment" #If this is a reply to a comment
+            parent = Comment.find_by_id(commentable_id)
+        else #If this is a comment to a picture
+        end
+        parent
+    end
+
     def get_authorname
         self.user.name
     end
@@ -31,4 +47,5 @@ class Comment < ApplicationRecord
     def deleted?
         !!(content=="DELETED_COMMENT_HIDE_ME")
     end
+
 end

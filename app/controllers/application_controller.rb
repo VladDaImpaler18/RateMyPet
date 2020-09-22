@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
     end
 
     def owns_picture?
-        picture_id = params[:id] || params[:picture_id]
-        current_user.pictures.include?(Picture.find(picture_id))
+        @picture ||= @comment.get_picture
+        current_user.pictures.include?(@picture)
     end
 
     def owns_comment?
