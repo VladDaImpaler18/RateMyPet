@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
 
 
-    def new
+      def new
         @comment = Comment.new
       end
   
@@ -18,6 +18,11 @@ class CommentsController < ApplicationController
           render 'pictures/show'
         end
       end
+      
+      def update
+        binding.pry
+      end
+
 
       def destroy
         @comment = Comment.find(params[:id])

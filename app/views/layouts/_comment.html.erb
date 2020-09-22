@@ -30,6 +30,7 @@
             <% end %>
         <% end %>
         <%= button_to "Delete Comment", comment_path(comment), method: :delete if comment.user==current_user && !comment.deleted? %>
+        <%= button_to "Edit Comment", comment_path(comment), method: :patch if comment.user==current_user && !comment.deleted? %>
         <%# comment replies: COMMENTCEPTION %>
         <ul>
             <%= render partial: "layouts/comment", collection: comment.comments %>

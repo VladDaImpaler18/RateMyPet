@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-    before_action :require_login, except: [:gallery]
+    before_action :require_login, except: [:gallery, :filter]
     before_action :set_picture, only: [:show, :edit, :update, :destroy]
     before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
 
