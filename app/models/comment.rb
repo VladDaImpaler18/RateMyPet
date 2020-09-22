@@ -23,4 +23,12 @@ class Comment < ApplicationRecord
     def get_authorname
         self.user.name
     end
+
+    def display_content
+        deleted? ? "This message has been deleted" : content
+    end
+
+    def deleted?
+        !!(content=="DELETED_COMMENT_HIDE_ME")
+    end
 end

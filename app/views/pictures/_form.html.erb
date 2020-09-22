@@ -22,5 +22,5 @@
     
 <% end %>
 <br><br>
-<%= button_to "Delete Page", pictures_path, method: :delete if picture.valid? %>
+<%= button_to "Delete Page", picture_path(picture), method: :delete if picture.valid? %>
 <%= link_to 'Back', :back %>

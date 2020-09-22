@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
     before_action :require_login, except: [:gallery]
-    before_action :set_picture, only: [:show, :edit, :update]
+    before_action :set_picture, only: [:show, :edit, :update, :destroy]
     before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
 
 
@@ -59,8 +59,8 @@ class PicturesController < ApplicationController
 
     
     def destroy
-        #must validate current_user's picture ownership
-        binding.pry
+        @picture.destroy
+        redirect_to pictures_path
     end
 
 

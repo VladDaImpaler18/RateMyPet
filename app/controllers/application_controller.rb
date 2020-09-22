@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :require_login, only: [:dashboard]
-
+    helper_method :owns_comment?
     helper_method :owns_picture?
 
     def welcome
@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
     def owns_picture?
         picture_id = params[:id] || params[:picture_id]
         current_user.pictures.include?(Picture.find(picture_id))
+    end
+
+    def owns_comment?
+        comment = Comment.find(params[:id])
+        !!(comment.user == current_user)
     end
 
 end

@@ -2,25 +2,33 @@
     <div>
             Has <%= pluralize(comments.count, "comment") %> </small><br>
             <% comments.each do |comment|%>
-                <ul><%= comment.content %></ul>
+                <ul><%= comment.display_content %></ul>
             <% end %>
     </div>
 <% else %>
     <li>
-        <p><%= comment.content %></p>
+        <p><%= comment.display_content %></p>
         <small>
-            By <%= comment.get_authorname %><br>
+        <% if comment.deleted? %>
+            Comment deleted <br>
+            <small>Deleted <%= time_ago_in_words(comment.updated_at) %> ago</small><br>
+        <% else %>
+            By <%= comment.get_authorname %> <br>
             Submitted <%= time_ago_in_words(comment.created_at) %> ago<br>
             <% if comment.updated_at > comment.created_at %>
                 <small>Edited <%= time_ago_in_words(comment.updated_at) %> ago</small><br>
             <% end %>
+        <% end %>
         </small>
 
         <%= form_for [comment, Comment.new] do |f| %>
         <%= hidden_field_tag :picture_id, params[:id] %>
+            <% if !comment.deleted? %>
             <%= f.text_area :content, placeholder: "Add a Reply" %><br>
             <%= f.submit "Reply to #{comment.get_authorname}" %>
+            <% end %>
         <% end %>
+        <%= button_to "Delete Comment", comment_path(comment), method: :delete if comment.user==current_user && !comment.deleted? %>
         <%# comment replies: COMMENTCEPTION %>
         <ul>
             <%= render partial: "layouts/comment", collection: comment.comments %>

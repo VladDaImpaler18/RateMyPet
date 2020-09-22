@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
     before_action :make_commentable, only: [:create]
     before_action :require_login
-    helper_method :owns_comment?
+    before_action :allowed_to_modify?, only: [:edit, :update, :destroy]
+
 
     def new
         @comment = Comment.new
@@ -19,8 +20,11 @@ class CommentsController < ApplicationController
       end
 
       def destroy
+        @comment = Comment.find(params[:id])
+        @comment.content="DELETED_COMMENT_HIDE_ME"
+        @comment.save(:validate => false)
         binding.pry
-        # replace content with "This message has been deleted" and user_id = nil and save without verify
+        redirect_back(fallback_location: root_path)
       end
     
     private
@@ -34,14 +38,9 @@ class CommentsController < ApplicationController
         @commentable = Picture.find_by_id(params[:picture_id]) if params[:picture_id]
     end
 
-    def owns_comment?
-      #see if this comment was made by current_user
-      binding.pry
-    end
-
     def allowed_to_modify?
-      binding.pry
       if !owns_comment?
+        redirect_back(fallback_location: root_path)
         #error message saying not allowed to edit a comment you didn't make. Brings back to page?   
       end
     end
