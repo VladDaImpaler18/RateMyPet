@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
         #Must be logged in
         #Comes here from Account Settings
         @pictures = Picture.owned_pictures(current_user)
-        @comments = Comment.new_since_login(current_user).comments_from_pictures
+        @comments = Comment.new_since_login(current_user).comments_from_pictures #.not_deleted to be implemented in next version
+        
 
     end
 

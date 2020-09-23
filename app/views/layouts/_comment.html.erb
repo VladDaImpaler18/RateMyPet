@@ -4,7 +4,7 @@
             Has <%= pluralize(comments.count, "comment") %> </small><br>
             <% comments.each do |comment|%>
                 <% next if comment.deleted? %>
-                <ul><%= link_to(comment.display_content, comment)%></ul>
+                <ul><%= link_to(comment.display_content, comment)%> <small>By: <%= comment.get_authorname%> </ul>
             <% end %>
     </div>
 <% else %>

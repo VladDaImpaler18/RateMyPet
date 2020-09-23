@@ -4,9 +4,14 @@ class Comment < ApplicationRecord
     belongs_to :user
     scope :new_since_login, -> (user) { where("created_at > ?", user.last_sign_in_at) }
     scope :comments_from_pictures, -> { where(commentable_type: 'Picture')}
+    #scope :not_deleted, -> { where("content NOT LIKE '#{DELETION_FLAG}-'") }
     validates :content, presence: true
     
+    DELETION_FLAG = "DELETED_COMMENT_MARKER_HIDDEN"
 
+    def not_deleted
+        
+    end
     def build_reply(content:, user_id:)
         #takes the current comment, creates commentable from it and builds comment
         commentable = Comment.find_by_id(self.id)
@@ -26,7 +31,7 @@ class Comment < ApplicationRecord
         until comment.commentable_type=="Picture" do
             comment = comment.parent_comment
         end
-        pic = Picture.find_by_id(comment.commentable_id)
+        Picture.find_by_id(comment.commentable_id)
     end
 
     def parent_comment
@@ -46,7 +51,16 @@ class Comment < ApplicationRecord
     end
 
     def deleted?
-        !!(content=="DELETED_COMMENT_HIDE_ME")
+        content.split("-").first == DELETION_FLAG
+    end
+
+    def set_delete_flag
+        if !deleted?
+            content.prepend("#{DELETION_FLAG}-")
+            true
+        else
+            false
+        end
     end
 
 end

@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
 
       def destroy
         @comment = Comment.find(params[:id])
-        @comment.content="DELETED_COMMENT_HIDE_ME"
+        @comment.set_delete_flag
         if @comment.save
           picture = @comment.get_picture
           redirect_to picture_path(picture)
