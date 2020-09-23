@@ -2,7 +2,8 @@ class Comment < ApplicationRecord
     belongs_to :commentable, polymorphic: true
     has_many :comments, as: :commentable
     belongs_to :user
-
+    scope :new_since_login, -> (user) { where("created_at > ?", user.last_sign_in_at) }
+    scope :comments_from_pictures, -> { where(commentable_type: 'Picture')}
     validates :content, presence: true
     
 

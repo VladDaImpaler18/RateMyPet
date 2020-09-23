@@ -20,9 +20,12 @@ class CommentsController < ApplicationController
       end
       
       def update
-        binding.pry
+        #To be implemented for next version
       end
 
+      def show
+        @comment = Comment.find_by_id(params[:id])
+      end
 
       def destroy
         @comment = Comment.find(params[:id])

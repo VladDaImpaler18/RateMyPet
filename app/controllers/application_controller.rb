@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
     def dashboard
         #Must be logged in
         #Comes here from Account Settings
-        @pictures = Picture.where(user_id: current_user.id)
+        @pictures = Picture.owned_pictures(current_user)
+        @comments = Comment.new_since_login(current_user).comments_from_pictures
+
     end
 
     private

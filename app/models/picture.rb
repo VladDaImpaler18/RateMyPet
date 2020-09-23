@@ -4,6 +4,7 @@ class Picture < ApplicationRecord
     has_many :comments, as: :commentable, dependent: :destroy
     has_one_attached :image, dependent: :destroy
     scope :category_filter, -> (category_id) { where(category_id: category_id) }
+    scope :owned_pictures, -> (user) { where(user_id: user.id) }
 
 
 

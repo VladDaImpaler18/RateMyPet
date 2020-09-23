@@ -12,6 +12,8 @@
         
     <% end %>
 </div> <%# flex-holder %>
+<h4>New comments since your last visit</h4>
+<%= render partial: "layouts/comment", locals: {comments: @comments, type: "preview"} %>
 
 <%= link_to "More pictures...", pictures_path %><br>
 <%= link_to "Add picture", new_picture_path %>
