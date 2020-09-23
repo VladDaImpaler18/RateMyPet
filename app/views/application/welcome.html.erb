@@ -1,7 +1,7 @@
 <h1>Welcome to RateMyPet</h1>
 <p>This website is spinoff to the classic "Rate my <em>whatever</em>" websites of the early 2000's and today</p>
 <br>
-<h3>Come browse our pets gallery, where you can search based on animal, popularity, or whatever's new"</h2>
+<h3>Come browse our pets gallery, where you can search based on animal, *popularity, or *whatever's new</h2>
 <%# Does this turn into a partial? How would I differentiate inner partials %>
 <div class=flex-picture_gallery>
     <% @pictures.each do |picture| %>
@@ -12,4 +12,6 @@
         
     <% end %>
 </div> <%# flex-holder %>
-<%= link_to "Go to gallery!", gallery_path %>
+<%= link_to "Go to gallery!", gallery_path %><br>
+
+<small><small><small><small>*Not all features are included at initial release</small></small></small></small>
