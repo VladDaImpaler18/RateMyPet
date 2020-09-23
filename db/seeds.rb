@@ -284,6 +284,8 @@ reply2 = bad_comment.build_reply(:content => "Cats are okay but dogs are better 
 reply2.save
 reply2_reply = reply2.build_reply(:content => "You are right, I see the errors of my ways.", :user_id => 3, :created_at => FFaker::Time.datetime)
 reply2_reply.save
+bad_comment.set_delete_flag
+bad_comment.save
 
 #Secnario 2 - Cute mako picture gets lots of comments
 p = Picture.find_by(:title => "Mako is wayyyy to cute")
