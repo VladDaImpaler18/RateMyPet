@@ -11,6 +11,7 @@
 #**/db/development.sqlite
 **/db/schema.rb
 *.jpg
+*.jpeg
 
 # Ignore bundler config.
 /.bundle

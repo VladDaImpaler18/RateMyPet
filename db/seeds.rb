@@ -13,7 +13,7 @@ if User.count.zero?
         :email => FFaker::Internet.safe_email,
         :username => FFaker::Internet.user_name,
         :password => FFaker::Internet.password,
-        :last_sign_in_at => datetime
+        :last_sign_in_at => FFaker::Time.datetime
       ).encrypted_password
     end
   end
@@ -40,8 +40,6 @@ Category.create(
 # Dogs => { Brian the Family Guy Dog.jpg, Courage The Cowardly Dog.jpg,
 #          Pluto the Dog.jpg, Ren Hoek.jpg, Santa's Little Helper.jpeg, Scooby Doo.jpg }
 
-# Picture(id: integer, title: string, created_at: datetime, updated_at: datetime, user_id: integer,
-#  category_id: integer, description: text)
 p = Picture.new(
   :title => "Brian",
   :created_at => FFaker::Time.datetime,
@@ -272,8 +270,7 @@ p.image.attach(
 )
 p.save
 
-Comment(id: integer, content: text, created_at: datetime,
-  updated_at: datetime, commentable_id: integer, commentable_type: string, user_id: integer)
+
 #Scenario 1 - user_id 3 is a cat loving jerk, will comment, then delete their own comment after others have replied.
 p = Picture.find_by(:title => "Crazy Boi Mako")
 bad_comment = p.comments.create(
@@ -281,28 +278,28 @@ bad_comment = p.comments.create(
   :created_at => FFaker::Time.datetime,
   :user_id => 3
 )
-reply1 = bad_comment.build_reply(:content => "Wow this guy is an unneeded troll", :user_id => 1)
+reply1 = bad_comment.build_reply(:content => "Wow this guy is an unneeded troll", :user_id => 1, :created_at => FFaker::Time.datetime)
 reply1.save
-reply2 = bad_comment.build_reply(:content => "Cats are okay but dogs are better FACT!", :user_id => 2)
+reply2 = bad_comment.build_reply(:content => "Cats are okay but dogs are better FACT!", :user_id => 2, :created_at => FFaker::Time.datetime)
 reply2.save
-reply2_reply = reply2.build_reply(:content => "You are right, I see the errors of my ways.", :user_id => 3)
+reply2_reply = reply2.build_reply(:content => "You are right, I see the errors of my ways.", :user_id => 3, :created_at => FFaker::Time.datetime)
 reply2_reply.save
 
 #Secnario 2 - Cute mako picture gets lots of comments
 p = Picture.find_by(:title => "Mako is wayyyy to cute")
-p.comment.create(
-  :content => "WOW This is adorable"
+p.comments.create(
+  :content => "WOW This is adorable",
   :user_id => 1
 )
-p.comment.create(
-  :content => "Such a cutie!"
+p.comments.create(
+  :content => "Such a cutie!",
   :user_id => 2
 )
-p.comment.create(
-  :content => "Awwwww"
+p.comments.create(
+  :content => "Awwwww",
   :user_id => 3
 )
-p.comment.create(
-  :content => "Such a cutie puppy"
+p.comments.create(
+  :content => "Such a cutie puppy",
   :user_id => 4
 )
