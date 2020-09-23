@@ -10,15 +10,16 @@ class Comment < ApplicationRecord
     DELETION_FLAG = "DELETED_COMMENT_MARKER_HIDDEN"
 
     def not_deleted
-        
+        #Could do scope method here, but will be implemented in future version.
     end
-    def build_reply(content:, user_id:)
+    def build_reply(content:, user_id:, created_at:)
         #takes the current comment, creates commentable from it and builds comment
         commentable = Comment.find_by_id(self.id)
-        if user_signed_in?
+        if defined?(user_signed_in?) && user_signed_in?
             reply = commentable.comments.new(:user_id => current_user.id, :content => content)
-        else
+        else #console testing and for method for seeds
             reply = commentable.comments.new(:user_id => user_id, :content => content)
+            reply.created_at= created_at if defined?(created_at)
         end
 
         raise "Problem in app>models>comment.rb Comment#build_reply(*args)".inspect unless reply.valid?
