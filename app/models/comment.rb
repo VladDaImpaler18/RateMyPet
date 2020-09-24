@@ -35,10 +35,11 @@ class Comment < ApplicationRecord
         Picture.find_by_id(comment.commentable_id)
     end
 
-    def parent_comment
+    def parent_comment #can also use .commentable, but this will return a Picture class for top level comments.
         if commentable_type=="Comment" #If this is a reply to a comment
             parent = Comment.find_by_id(commentable_id)
-        else #If this is a comment to a picture
+        else 
+            #If this is a comment to a picture do nothing.
         end
         parent
     end
